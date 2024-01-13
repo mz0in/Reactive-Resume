@@ -1,0 +1,46 @@
+The contents of the updated ".github/workflows/main.yml" file:
+
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
+
+      - name: Deploy
+        run: npm run deploy
+
+This updated workflow file ensures that the GitHub Actions run is properly configured. It listens for pushes and pull requests on the main branch. The build job runs on an Ubuntu environment and performs the following steps:
+1. Checks out the repository.
+2. Sets up Node.js version 14.
+3. Installs the project dependencies using `npm ci`.
+4. Builds the project using `npm run build`.
+5. Runs the tests using `npm test`.
+6. Deploys the project using `npm run deploy`.
+
+Commit message: "feat/fix: Update GitHub Actions workflow file"
